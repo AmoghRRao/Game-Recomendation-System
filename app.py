@@ -80,5 +80,4 @@ def get_game_info(ids):
 
 
 if __name__ == "__main__":
-    from waitress import serve
-    serve(app)
+    app.run(debug=True, threaded=True, port=5000)
