@@ -1,10 +1,19 @@
 from flask import Flask, url_for, request, render_template, redirect
 import pandas as pd
-from pandas.io import pickle
 import requests
 import json
 import pickle
 import os
+from os.path import exists
+
+from google_drive_downloader import GoogleDriveDownloader as gdd
+
+
+if not exists('similarity.pkl')
+gdd.download_file_from_google_drive(file_id='14LXxwldPTV5K1EmrDr-HQc1svBhMKDvT',
+                                    dest_path='./similarity.pkl',
+                                    unzip=False)
+
 
 app = Flask(__name__, static_folder='static')
 df = pd.read_csv('Windows_info_complete.csv')
@@ -38,8 +47,8 @@ def game_recomend_page(game_name):
         df.iloc[game_index].storyline) == 'nan' else ''
     genre = df.iloc[game_index].genres
     recommendation_data = get_recomendation(game_index)
-    cover_image = get_game_info(game_id)
     return str(game_index)
+    cover_image = get_game_info(game_id)
     game_data = {'cover_image': cover_image,
                  'game_title': game_name, 'game_summary': game_summary, 'game_story': game_story, 'genre': genre}
 
