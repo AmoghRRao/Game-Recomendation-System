@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet"
+        type="text/css" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/games.css' ) }}">
+    <title>{{ game_data['game_title'] }}</title>
+</head>
+<style>
+    .submitbutton {
+        filter: invert(1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        padding-top: 2px;
+    }
+</style>
+
+<body>
+    <div>
+        <form method="post">
+            <ul class="nav">
+                <li class="navbutton"><a href="{{ url_for('home') }}"><img style="height: 50px; filter: invert(1);"
+                            src="{{ url_for('static', filename= 'assets/icon.png' ) }}" alt=""></a></li>
+                <li class="navbutton"><input type="text" id="search" name="search"></li>
+                <li class="navbutton"><input class="submitbutton" type="image"
+                        src="{{ url_for('static', filename= 'assets/search.png' )}}" alt="Submit" /></li>
+            </ul>
+        </form>
+    </div>
+    <div style="width: 60%; margin: auto;">
+        <table style="margin-top:5%;">
+            <td>
+
+                <img src="{{ game_data['cover_image'] }}" alt="">
+            </td>
+            <td style="padding-left:30px;vertical-align: top;">
+                <h1>{{ game_data['game_title'] }}</h1>
+                <p>{{game_data['game_summary']}}</p>
+                {% if game_data['game_story'] != '' %}
+                <h4>Story Line</h4>
+                <p>{{game_data['game_story']}}</p>
+                {% endif %}
+                <p><b>Genre : </b>{{game_data['genre']}}</p>
+            </td>
+
+            </tr>
+            <tr>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 70%; margin: auto;">
+        <h1>Similar Games</h1>
+        <div class="gallery">
+            <a href="{{ url_for('game_recomend_page', game_name=keys[0] ,type =keys[0]) }}">
+                <img src="{{recommendation_data[keys[0]][1]}}">
+            </a>
+            <div class="desc">{{keys[0]}}</div>
+        </div>
+
+        <div class="gallery">
+            <a href="{{ url_for('game_recomend_page', game_name=keys[1] ,type =keys[1]) }}">
+                <img src="{{recommendation_data[keys[1]][1]}}" alt="Forest">
+            </a>
+            <div class="desc">{{keys[1]}}</div>
+        </div>
+
+        <div class="gallery">
+            <a href="{{ url_for('game_recomend_page', game_name=keys[2] ,type =keys[2]) }}">
+                <img src="{{recommendation_data[keys[2]][1]}}">
+            </a>
+            <div class="desc">{{keys[2]}}</div>
+        </div>
+
+        <div class="gallery">
+            <a href="{{ url_for('game_recomend_page', game_name=keys[3] ,type =keys[3]) }}">
+                <img src="{{recommendation_data[keys[3]][1]}}">
+            </a>
+            <div class="desc">{{keys[3]}}</div>
+        </div>
+        <div class="gallery">
+            <a href="{{ url_for('game_recomend_page', game_name=keys[4] ,type =keys[4]) }}">
+                <img src="{{recommendation_data[keys[4]][1]}}">
+            </a>
+            <div class="desc">{{keys[4]}}</div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var availableTags = [
+                {% for game in games %}
+                    "{{game}}",
+            {% endfor %}
+                ];
+        $("#search").autocomplete({
+            source: availableTags
+        });
+          } );
+    </script>
+</body>
+
+</html>
