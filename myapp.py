@@ -37,9 +37,9 @@ def game_recomend_page(game_name):
     game_story = df.iloc[game_index].storyline if not str(
         df.iloc[game_index].storyline) == 'nan' else ''
     genre = df.iloc[game_index].genres
-    return str(game_index)
     recommendation_data = get_recomendation(game_index)
     cover_image = get_game_info(game_id)
+    return str(game_index)
     game_data = {'cover_image': cover_image,
                  'game_title': game_name, 'game_summary': game_summary, 'game_story': game_story, 'genre': genre}
 
