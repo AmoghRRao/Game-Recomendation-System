@@ -32,7 +32,6 @@ def search_from_recommend_page(game_name):
 def game_recomend_page(game_name):
 
     game_index = df[df['titles'] == game_name].index[0]
-    return str(game_index)
     game_id = int(df.iloc[game_index].id)
     game_summary = df.iloc[game_index].summary
     game_story = df.iloc[game_index].storyline if not str(
@@ -44,6 +43,7 @@ def game_recomend_page(game_name):
                  'game_title': game_name, 'game_summary': game_summary, 'game_story': game_story, 'genre': genre}
 
     games = df['titles'].values
+    return str(game_index)
     return render_template('games.html', game_data=game_data, recommendation_data=recommendation_data, keys=list(recommendation_data.keys()), games=games)
 
 
