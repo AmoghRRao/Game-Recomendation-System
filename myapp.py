@@ -9,10 +9,10 @@ from os.path import exists
 from google_drive_downloader import GoogleDriveDownloader as gdd
 
 
-if not exists('similarity.pkl')
-gdd.download_file_from_google_drive(file_id='14LXxwldPTV5K1EmrDr-HQc1svBhMKDvT',
-                                    dest_path='./similarity.pkl',
-                                    unzip=False)
+if not exists('similarity.pkl'):
+    gdd.download_file_from_google_drive(file_id='14LXxwldPTV5K1EmrDr-HQc1svBhMKDvT',
+                                        dest_path='./similarity.pkl',
+                                        unzip=False)
 
 
 app = Flask(__name__, static_folder='static')
