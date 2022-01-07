@@ -31,6 +31,7 @@ def search_from_recommend_page(game_name):
 def game_recomend_page(game_name):
 
     game_index = df[df['titles'] == game_name].index[0]
+    print(game_index)
     game_id = int(df.iloc[game_index].id)
     game_summary = df.iloc[game_index].summary
     game_story = df.iloc[game_index].storyline if not str(
@@ -73,9 +74,11 @@ def get_game_info(ids):
         f'fields *; where game = ({ids});').encode('utf-8'))
 
     if x.status_code == 500:
-        return
+        return ''
 
     cover_info = json.loads(x.text)
+    if len(cover_info) < 1:
+        return ''
     return cover_info[0]['url'].replace('thumb', 'cover_big')
 
 
