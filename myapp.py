@@ -32,7 +32,7 @@ def search_from_recommend_page(game_name):
 def game_recomend_page(game_name):
 
     game_index = df[df['titles'] == game_name].index[0]
-    print(game_index)
+    return str(game_index)
     game_id = int(df.iloc[game_index].id)
     game_summary = df.iloc[game_index].summary
     game_story = df.iloc[game_index].storyline if not str(
