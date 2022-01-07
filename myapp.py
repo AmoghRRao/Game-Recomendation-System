@@ -38,12 +38,12 @@ def game_recomend_page(game_name):
         df.iloc[game_index].storyline) == 'nan' else ''
     genre = df.iloc[game_index].genres
     recommendation_data = get_recomendation(game_index)
+    return str(game_index) + str(recommendation_data)
     cover_image = get_game_info(game_id)
     game_data = {'cover_image': cover_image,
                  'game_title': game_name, 'game_summary': game_summary, 'game_story': game_story, 'genre': genre}
 
     games = df['titles'].values
-    return str(game_index)
     return render_template('games.html', game_data=game_data, recommendation_data=recommendation_data, keys=list(recommendation_data.keys()), games=games)
 
 
