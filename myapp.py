@@ -4,6 +4,7 @@ from pandas.io import pickle
 import requests
 import json
 import pickle
+import os
 
 app = Flask(__name__, static_folder='static')
 df = pd.read_csv('Windows_info_complete.csv')
@@ -83,5 +84,10 @@ def get_game_info(ids):
 
 
 if __name__ == "__main__":
-    print("Starting")
-    app.run(debug=True, threaded=True, port=5000)
+    import os
+    ON_HEROKU = os.environ.get('ON_HEROKU')
+    if ON_HEROKU:
+        port = int(os.environ.get("PORT", 17995))
+    else:
+        port = 5000
+    app.run(debug=True, threaded=True, port=port)
