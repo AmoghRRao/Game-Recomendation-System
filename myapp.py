@@ -80,4 +80,5 @@ def get_game_info(ids):
 
 
 if __name__ == "__main__":
+    print("Starting")
     app.run(debug=True, threaded=True, port=5000)
