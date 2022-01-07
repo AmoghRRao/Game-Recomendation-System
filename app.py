@@ -9,7 +9,7 @@ app = Flask(__name__, static_folder='static')
 df = pd.read_csv('Windows_info_complete.csv')
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
     games = df['titles'].values
     return render_template("index.html", games=games)
@@ -80,4 +80,4 @@ def get_game_info(ids):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
